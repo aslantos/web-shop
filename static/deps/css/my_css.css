@@ -1,38 +1,63 @@
+/* Корневые переменные для обеспечения согласованного стиля */
+:root {
+    --shadow-color: #000000;
+    --badge-shadow: 2px 2px 15px 9px var(--shadow-color);
+    --custom-shadow: 5px 5px 25px 19px var(--shadow-color);
+}
+
+/* Стиль для body с резервным цветом фона */
 body {
-  background-image: url("../images/bg-image.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center center;
-  background-size: cover;
-  height: 100%;
+    background-color: #ffffff; /* Резервный цвет для фонового изображения */
+    background-image: url("../images/bg-image.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+    height: 100%;
 }
 
+/* Иконка выпадающего списка */
 .dropdown-toggle::after {
-  content: none;
+    content: none;
 }
 
+/* Класс для пользовательской тени */
 .custom-shadow {
-  box-shadow: 5px 5px 25px 19px #000000;
+    box-shadow: var(--custom-shadow);
 }
 
+/* Стиль текста для идентификатора продукта */
 .product_id {
-  color: gray;
-  font-size: 15px;
+    color: #4a4a4a; /* Улучшенная контрастность для читаемости */
+    font-size: 15px;
 }
 
+/* Стиль для бейджа */
 .badge.bg-warning.text-dark {
-  position: absolute;
-  top: 10px;
-  right: 5px;
-  z-index: 1;
-  padding: 5px 10px;
-  border-radius: 3px;
-  font-size: 1rem;
-  box-shadow: 2px 2px 15px 9px #000000;
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    z-index: 1;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 1rem;
+    box-shadow: var(--badge-shadow);
 }
 
+/* Баннер бейджа */
 .badge-banner {
-  top: 80%;
-  border-radius: 15px;
-  font-size: 0.7rem;
+    top: 80%;
+    border-radius: 15px;
+    font-size: 0.7rem;
+}
+
+/* так для дизайна */
+@media (max-width: 768px) {
+    .badge.bg-warning.text-dark {
+        font-size: 0.8rem;
+    }
+
+    .badge-banner {
+        top: 85%;
+    }
 }
