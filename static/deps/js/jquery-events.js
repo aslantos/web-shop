@@ -1,35 +1,37 @@
-// Когда html документ готов (прорисован)
+// Когда HTML-документ готов
 $(document).ready(function () {
-    // Берем из разметки элемент по id - оповещения от django
-    var notification = $('#notification');
-    // И через 7 сек. убираем
+    const NOTIFICATION_TIMEOUT = 7000; // Константа для времени показа оповещения
+
+    // Получаем элемент оповещения по ID
+    const notification = $('#notification');
+    // Убираем оповещение через заданное время
     if (notification.length > 0) {
-        setTimeout(function () {
+        setTimeout(() => {
             notification.alert('close');
-        }, 7000);
+        }, NOTIFICATION_TIMEOUT);
     }
 
-    // При клике по значку корзины открываем всплывающее(модальное) окно
-    $('#modalButton').click(function () {
-        $('#exampleModal').appendTo('body');
-
-        $('#exampleModal').modal('show');
+    // Обработчик клика по значку корзины для открытия модального окна
+    $('#modalButton').on('click', () => {
+        const modal = $('#exampleModal');
+        modal.appendTo('body'); // Переносим модальное окно в конец body
+        modal.modal('show'); // Показываем модальное окно
     });
 
-    // Собыите клик по кнопке закрыть окна корзины
-    $('#exampleModal .btn-close').click(function () {
-        $('#exampleModal').modal('hide');
+    // Обработчик клика по кнопке закрытия модального окна
+    $('#exampleModal .btn-close').on('click', () => {
+        $('#exampleModal').modal('hide'); // Закрываем модальное окно
     });
 
-    // Обработчик события радиокнопки выбора способа доставки
-    $("input[name='requires_delivery']").change(function() {
-        var selectedValue = $(this).val();
-        // Скрываем или отображаем input ввода адреса доставки
+    // Обработчик изменения состояния радиокнопки выбора способа доставки
+    $("input[name='requires_delivery']").on('change', function () {
+        const selectedValue = $(this).val();
+        const deliveryField = $("#deliveryAddressField"); // Поле ввода адреса доставки
+
         if (selectedValue === "1") {
-            $("#deliveryAddressField").show();
+            deliveryField.addClass('visible'); // Добавляем CSS-класс для отображения
         } else {
-            $("#deliveryAddressField").hide();
+            deliveryField.removeClass('visible'); // Убираем CSS-класс для скрытия
         }
     });
-
 });
