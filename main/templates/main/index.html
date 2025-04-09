@@ -1,19 +1,22 @@
 {% extends "main/base.html" %}
 {% load static %}
 
-{% block css %}
+{% block head %}
+    <!-- Добавлен meta-тег для адаптивности -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Ссылка на CSS -->
     <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
-{% endblock css %}
-
+{% endblock head %}
 
 {% block content %}
-    <h1 class="mt-5 pt-5"><strong>{{ content }}</strong></h1>
+    <h1 class="mt-5 pt-5"><strong>{{ content|default:"Добро пожаловать в наш магазин!" }}</strong></h1>
 {% endblock content %}
 
 {% block footer %}
 <footer class="py-4 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Home Python Hub Studio 2023</p>
+        <!-- Динамическое отображение текущего года -->
+        <p class="m-0 text-center text-white">Copyright &copy; Home Python Hub Studio {{ now|date:"Y" }}</p>
     </div>
 </footer>
 {% endblock footer %}
