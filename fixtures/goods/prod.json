@@ -1,0 +1,30 @@
+[
+    {
+        "model": "goods.products",
+        "pk": 1,
+        "fields": {
+            "name": "������ ������ � ��� �����",
+            "slug": "chajnyj-stolik-i-tri-stula",
+            "description": "�������� �� ��� ������� � ������������ ������ ��� ��������� �������.",
+            "image": "",
+            "price": "150.00",
+            "discount": "0.00",
+            "quantity": 10,
+            "category": 5
+        }
+    },
+    {
+        "model": "goods.products",
+        "pk": 2,
+        "fields": {
+            "name": "������ ������ � ��� �����",
+            "slug": "chajnyj-stolik-i-dva-stula",
+            "description": "����� �� ����� � ���� ������� � ����������������� �����.",
+            "image": "",
+            "price": "93.00",
+            "discount": "0.00",
+            "quantity": 7,
+            "category": 10
+        }
+    }
+]
