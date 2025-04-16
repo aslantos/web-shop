@@ -3,6 +3,9 @@
     --shadow-color: #000000;
     --badge-shadow: 2px 2px 15px 9px var(--shadow-color);
     --custom-shadow: 5px 5px 25px 19px var(--shadow-color);
+
+    /* Добавление переменной для основного цвета */
+    --primary-color: #007bff; /* Синий цвет */
 }
 
 /* Стиль для body с резервным цветом фона */
@@ -42,6 +45,7 @@ body {
     border-radius: 3px;
     font-size: 1rem;
     box-shadow: var(--badge-shadow);
+    animation: pulse 2s infinite; /* Анимация для бейджа */
 }
 
 /* Баннер бейджа */
@@ -60,4 +64,60 @@ body {
     .badge-banner {
         top: 85%;
     }
+
+    /* Адаптивный текст для .product_id */
+    .product_id {
+        font-size: 12px;
+    }
+}
+
+/* Эффект для изображений при наведении */
+img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Плавный переход для всех элементов */
+* {
+    transition: all 0.3s ease;
+}
+
+/* Стиль для кнопок */
+button {
+    background-color: var(--primary-color, #007bff);
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Анимация для бейджа */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px var(--shadow-color);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px var(--shadow-color);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px var(--shadow-color);
+    }
+}
+
+/* Стиль для ссылок */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
