@@ -1,25 +1,38 @@
 {% extends "main/base.html" %}
 {% load static %}
 
-{% block title %}
-    О нас - Web Shop
-{% endblock title %}
-
-{% block css %}
-    <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
-{% endblock css %}
+{% block title %}О нас - Web Shop{% endblock %}
 
 {% block content %}
-    <div class="mt-5 pt-5 bg-white custom-shadow rounded">
-        <h2 class="m-2"><strong>{{ content|default:"О нас" }}</strong></h2>
-        <p class="m-2">{{ text_on_page|default:"Добро пожаловать на страницу о нас. Здесь вы узнаете больше о нашем проекте." }}</p>
+<section class="animate mt-8">
+    <div class="bg-gradient-to-r from-blue-50 to-purple-50 py-12 px-6 rounded-lg">
+        <h1 class="text-4xl font-bold text-center mb-6">{{ content|default:"О нашем магазине" }}</h1>
+        <p class="text-xl text-center text-gray-600 max-w-2xl mx-auto">
+            {{ text_on_page|default:"Мы создаём удобный сервис для ваших покупок." }}
+        </p>
     </div>
-{% endblock content %}
+</section>
 
-{% block footer %}
-<footer class="py-4 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Home Python Hub Studio {{ now|date:"Y" }}</p>
+<section class="animate py-12">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-8">Наши преимущества</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- Карточка 1 -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <h3 class="text-xl font-semibold mb-3">Качество</h3>
+                <p class="text-gray-600">Все товары проходят проверку.</p>
+            </div>
+            <!-- Карточка 2 -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <h3 class="text-xl font-semibold mb-3">Доставка</h3>
+                <p class="text-gray-600">Быстрая отправка заказов.</p>
+            </div>
+            <!-- Карточка 3 -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <h3 class="text-xl font-semibold mb-3">Поддержка</h3>
+                <p class="text-gray-600">Помощь 24/7.</p>
+            </div>
+        </div>
     </div>
-</footer>
-{% endblock footer %}
+</section>
+{% endblock %}
