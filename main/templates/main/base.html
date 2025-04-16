@@ -1,49 +1,64 @@
-{% load static %}
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Лучший интернет-магазин мебели для вашего дома и офиса.">
-    <meta name="keywords" content="мебель, интернет-магазин, доставка, кухня, спальня, декор">
-    <meta name="author" content="Web-Shop">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>{% block title %}Web Shop{% endblock %}</title>
+    
+    <!-- Подключаем Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    {% block css %}
-    {% endblock css %}
-    <title>{{ title }}</title>
+    
+    <!-- Подключаем Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js"></script>
+    
+    <!-- Ваши CSS -->
+    <link rel="stylesheet" href="{% static 'deps/css/my_footer_css.css' %}">
+    {% block css %}{% endblock %}
 </head>
 
-<body class="font-roboto bg-gray-50 text-gray-800">
-    <header class="bg-gray-900 text-white">
-        <nav class="container mx-auto flex items-center justify-between py-4">
-            <a href="{% url 'main:index' %}" class="text-xl font-bold">Web-Shop</a>
-            <ul class="flex space-x-4">
-                <li><a href="#" class="hover:text-gray-400">Доставка и оплата</a></li>
-                <li><a href="#" class="hover:text-gray-400">Контактная информация</a></li>
-                <li><a href="{% url 'main:about' %}" class="hover:text-gray-400">Про нас</a></li>
-                <li><a href="carts/cart.html" class="hover:text-gray-400">Корзина</a></li>
-                <li><a href="users/login.html" class="hover:text-gray-400">Войти</a></li>
-            </ul>
-        </nav>
-    </header>
+<body class="bg-gray-50">
+    <!-- Навбар -->
+    <nav x-data="{ mobileMenuOpen: false }" class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="/" class="text-xl font-bold">Web Shop</a>
+            <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden">☰</button>
+            <div class="hidden md:flex space-x-6">
+                <a href="/" class="hover:text-blue-600">Главная</a>
+                <a href="/about" class="hover:text-blue-600">О нас</a>
+            </div>
+        </div>
+        <!-- Мобильное меню -->
+        <div x-show="mobileMenuOpen" class="md:hidden px-4 pb-4">
+            <a href="/" class="block py-2 hover:text-blue-600">Главная</a>
+            <a href="/about" class="block py-2 hover:text-blue-600">О нас</a>
+        </div>
+    </nav>
 
-    <main class="container mx-auto mt-8">
-        {% block content %}
-        {% endblock content %}
-    </main>
+    {% block content %}{% endblock %}
 
-    <footer class="bg-gray-900 text-white py-4 mt-8">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2025 Web-Shop. Все права защищены.</p>
+    <!-- Футер -->
+    <footer class="py-4 bg-dark">
+        <div class="container mx-auto px-4">
+            <p class="m-0 text-center text-white">Copyright &copy; Home Python Hub Studio {{ now|date:"Y" }}</p>
         </div>
     </footer>
 
-    {% block footer %}
-    {% endblock footer %}
+    <!-- Подключаем GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    
+    <!-- Инициализация анимаций -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.utils.toArray('.animate').forEach((el, i) => {
+                gsap.from(el, { 
+                    opacity: 0, 
+                    y: 30, 
+                    duration: 0.8, 
+                    delay: i * 0.1 
+                });
+            });
+        });
+    </script>
 </body>
-
 </html>
