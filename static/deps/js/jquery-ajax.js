@@ -4,24 +4,36 @@ $(document).ready(function () {
 
     // Включаем индикатор загрузки для AJAX-запросов
     $(document).ajaxStart(function () {
-        $(".add-to-cart, .remove-from-cart, .increment, .decrement").prop("disabled", true);
+        $(".add-to-cart, .remove-from-cart, .increment, .decrement").addClass("loading").prop("disabled", true);
     }).ajaxStop(function () {
-        $(".add-to-cart, .remove-from-cart, .increment, .decrement").prop("disabled", false);
+        $(".add-to-cart, .remove-from-cart, .increment, .decrement").removeClass("loading").prop("disabled", false);
     });
 
     // Функция для отображения сообщений
     function showMessage(message) {
-        successMessage.html(message);
-        successMessage.fadeIn(400);
-        setTimeout(function () {
-            successMessage.fadeOut(400);
-        }, 7000);
+        successMessage
+            .html(message)
+            .fadeIn(400)
+            .css({
+                "background-color": "rgba(0, 128, 0, 0.8)",
+                "color": "white",
+                "border-radius": "5px",
+                "padding": "10px",
+                "box-shadow": "0 4px 8px rgba(0, 0, 0, 0.2)",
+            })
+            .animate({ top: "20px" }, 400)
+            .delay(5000)
+            .fadeOut(400, function () {
+                $(this).css({ top: "-50px" });
+            });
     }
 
     // Функция для обновления содержимого корзины
     function updateCartContent(html) {
         var cartItemsContainer = $("#cart-items-container");
-        cartItemsContainer.html(html);
+        cartItemsContainer.fadeOut(200, function () {
+            $(this).html(html).fadeIn(200);
+        });
     }
 
     // Обработчик события для кнопки "Добавить в корзину"
@@ -49,7 +61,10 @@ $(document).ready(function () {
             success: function (data) {
                 showMessage(data.message);
                 cartCount++;
-                goodsInCartCount.text(cartCount);
+                goodsInCartCount.text(cartCount).css({
+                    "font-weight": "bold",
+                    "color": "green",
+                }).animate({ fontSize: "1.5em" }, 300).animate({ fontSize: "1em" }, 300);
                 updateCartContent(data.cart_items_html);
             },
             error: function (xhr, status, error) {
@@ -68,5 +83,31 @@ $(document).ready(function () {
         var cart_id = $(this).data("cart-id");
         var remove_from_cart = $(this).attr("href");
 
-        if (!cart_id || !remove_from
-
+        if (!cart_id || !remove_from_cart) {
+            console.log("Некорректные данные для удаления из корзины");
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: remove_from_cart,
+            data: {
+                cart_id: cart_id,
+                csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+            },
+            success: function (data) {
+                showMessage(data.message);
+                cartCount -= data.quantity_deleted;
+                goodsInCartCount.text(cartCount).css({
+                    "font-weight": "bold",
+                    "color": "red",
+                }).animate({ fontSize: "1.5em" }, 300).animate({ fontSize: "1em" }, 300);
+                updateCartContent(data.cart_items_html);
+            },
+            error: function (xhr, status, error) {
+                showMessage("Произошла ошибка: " + error);
+                console.log("Ошибка: " + error);
+            },
+        });
+    });
+});
