@@ -1,7 +1,23 @@
+/* Основные стили для фиксированного футера */
+:root {
+    --footer-bg-color: #343a40; /* Фон футера */
+    --footer-padding: 10px 0; /* Отступы футера */
+    --footer-text-color: #ffffff; /* Цвет текста */
+}
+
 footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: #343a40;
-    padding: 10px 0;
-  }
+    background-color: var(--footer-bg-color);
+    color: var(--footer-text-color);
+    padding: var(--footer-padding);
+    text-align: center;
+}
+
+/* Адаптивность для малых экранов */
+@media (max-width: 768px) {
+    footer {
+        position: relative;
+    }
+}
