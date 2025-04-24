@@ -3,21 +3,146 @@
 
 {% block css %}
     <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
+    <style>
+        .about-hero {
+            background: linear-gradient(rgba(0,0,0,0.7), url('{% static "deps/images/about-bg.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 0;
+            color: white;
+        }
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: #dee2e6;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+        }
+        .timeline-icon {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #4a90e2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        .team-card {
+            transition: transform 0.3s;
+            border: none;
+            overflow: hidden;
+        }
+        .team-card:hover {
+            transform: translateY(-10px);
+        }
+        .team-img {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .team-card:hover .team-img {
+            transform: scale(1.05);
+        }
+    </style>
 {% endblock css %}
 
-
 {% block content %}
-    <div  class="mt-5 pt-5 bg-white custom-shadow rounded">
-        <h2 class = "m-2"><strong>{{ content }}</strong></h2>
-        <p class = "m-2">{{ text_on_page }}</p>
+<section class="about-hero">
+    <div class="container text-center">
+        <h1 class="display-4 mb-4">Наша история</h1>
+        <p class="lead">Более 10 лет качества и инноваций</p>
     </div>
-    
-{% endblock content %}
+</section>
 
-{% block footer %}
-<footer class="py-4 bg-dark">
+<section class="py-5 bg-light">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Home Python Hub Studio 2023</p>
+        <div class="row g-5">
+            <div class="col-md-6" data-aos="fade-right">
+                <h2 class="mb-4">Наша миссия</h2>
+                <p class="lead">Мы стремимся предоставлять лучшие продукты, сочетающие в себе инновации, качество и доступность.</p>
+                <p>Основанная в 2010 году, наша компания прошла путь от небольшого стартапа до лидера рынка в своей нише.</p>
+            </div>
+            <div class="col-md-6" data-aos="fade-left">
+                <img src="{% static "deps/images/about-mission.jpg" %}" alt="Наша команда" class="img-fluid rounded shadow">
+            </div>
+        </div>
     </div>
-</footer>
-{% endblock footer %}
+</section>
+
+<section class="timeline py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Этапы развития</h2>
+        
+        <div class="timeline-item" data-aos="zoom-in">
+            <div class="timeline-icon">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5>2010 - Основание компании</h5>
+                            <p>Начали с небольшой команды энтузиастов в гараже</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-aos="zoom-in">
+            <div class="timeline-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <div class="row justify-content-end">
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5>2015 - Первая награда</h5>
+                            <p>Получили премию "Лучший стартап года"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-white">
+    <div class="container">
+        <h2 class="text-center mb-5">Наша команда</h2>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="flip-up">
+                <div class="team-card card h-100">
+                    <img src="{% static "deps/images/team1.jpg" %}" class="team-img card-img-top" alt="Основатель">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Иван Петров</h5>
+                        <p class="text-muted">Основатель & CEO</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Добавьте аналогичные блоки для других членов команды -->
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container text-center">
+        <h2 class="mb-4">Хотите узнать больше?</h2>
+        <a href="#" class="btn btn-primary btn-lg">Связаться с нами</a>
+    </div>
+</section>
+{% endblock content %}
