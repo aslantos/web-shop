@@ -37,3 +37,28 @@ body {
   font-size: 0.7rem;
   color: #e74c3c; /* Красный цвет */
 }
+
+/* Оформление кнопок */
+button {
+  background-color: #3498db; /* Синий фон */
+  color: #fff; /* Белый текст */
+  border: none;
+  border-radius: 5px; /* Скругленные углы */
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9; /* Более темный синий при наведении */
+}
+
+button:active {
+  background-color: #1a5980; /* Еще более темный цвет при нажатии */
+}
+
+button:disabled {
+  background-color: #bdc3c7; /* Серый цвет для неактивных кнопок */
+  cursor: not-allowed;
+}
